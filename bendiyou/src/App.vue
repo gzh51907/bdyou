@@ -1,28 +1,65 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-10-11 15:31:13
+ * @LastEditTime: 2019-10-12 10:04:11
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div>
+      <van-row type="flex" class="ap">
+        <van-col span="24">
+          <header>头</header>
+        </van-col>
+        <van-col span="24">
+          <main>
+            <router-view />
+          </main>
+        </van-col>
+        <van-col span="24" style="  position: fixed;
+ left: 0;
+ bottom: 0;">
+          <footer>
+            <van-tabbar v-model="active" active-color="#EB111F" inactive-color="#000" route>
+              <van-tabbar-item :vant-icon="24" icon="home-o" style="font-size: 11px;" to="/index">首页</van-tabbar-item>
+              <van-tabbar-item icon="qr" style="font-size: 11px  ;height: 50px" to="/classify">分类</van-tabbar-item>
+              <van-tabbar-item icon="shop-o" style="font-size: 11px  ;height: 50px" to="/shop">店铺</van-tabbar-item>
+              <van-tabbar-item
+                icon="shopping-cart-o"
+                style="font-size: 11px  ;height: 50px"
+                to="/cart"
+              >购物车</van-tabbar-item>
+              <van-tabbar-item icon="contact" style="font-size: 11px  ;height: 50px" to="/mine">我的</van-tabbar-item>
+            </van-tabbar>
+          </footer>
+        </van-col>
+      </van-row>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'app',
-  components: {
-    HelloWorld
+  name: "app",
+  data() {
+    return {
+      active: "home"
+    };
+  },
+  components: {},
+  methods: {
+    click() {}
   }
-}
+};
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style >
+.ap {
+  /* display: flex; */
+  flex-direction: column;
+}
+#app .van-grid-item__content--center span {
+  margin: 0;
 }
 </style>
