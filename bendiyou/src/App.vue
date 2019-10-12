@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-10-11 15:31:13
- * @LastEditTime: 2019-10-12 10:08:56
+ * @LastEditTime: 2019-10-12 10:24:52
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -17,11 +17,7 @@
             <router-view />
           </main>
         </van-col>
-        <van-col
-          span="24"
-          style="  position: fixed;left: 0;bottom: 0;  background-color: #fff!important;
-    box-shadow: 0 0 10px 0 hsla(0, 6%, 58%, 0.6) !important;"
-        >
+        <van-col span="24" style="  position: fixed;left: 0;bottom: 0; ">
           <footer>
             <van-tabbar
               style=" background-color: #fff!important;
@@ -38,6 +34,7 @@
                 icon="shopping-cart-o"
                 style="font-size: 11px  ;height: 50px"
                 to="/cart"
+                info="0"
               >购物车</van-tabbar-item>
               <van-tabbar-item icon="contact" style="font-size: 11px  ;height: 50px" to="/mine">我的</van-tabbar-item>
             </van-tabbar>

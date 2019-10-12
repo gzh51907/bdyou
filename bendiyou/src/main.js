@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-10-11 15:31:13
- * @LastEditTime: 2019-10-12 09:32:43
+ * @LastEditTime: 2019-10-12 10:23:13
  * @LastEditors: Please set LastEditors
  */
 import Vue from 'vue'
@@ -21,7 +21,7 @@ import {
 
 
 
-Vue.use(Grid).use(GridItem).use(Row).use(Col).use(Tabbar).use(TabbarItem);;
+Vue.use(Grid).use(GridItem).use(Row).use(Col).use(Tabbar).use(TabbarItem);
 new Vue({
   router,
   render: h => h(App),
