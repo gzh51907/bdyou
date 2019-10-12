@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-10-11 15:31:13
- * @LastEditTime: 2019-10-12 10:04:11
+ * @LastEditTime: 2019-10-12 10:08:56
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -17,11 +17,20 @@
             <router-view />
           </main>
         </van-col>
-        <van-col span="24" style="  position: fixed;
- left: 0;
- bottom: 0;">
+        <van-col
+          span="24"
+          style="  position: fixed;left: 0;bottom: 0;  background-color: #fff!important;
+    box-shadow: 0 0 10px 0 hsla(0, 6%, 58%, 0.6) !important;"
+        >
           <footer>
-            <van-tabbar v-model="active" active-color="#EB111F" inactive-color="#000" route>
+            <van-tabbar
+              style=" background-color: #fff!important;
+    box-shadow: 0 0 10px 0 hsla(0, 6%, 58%, 0.6) !important;"
+              v-model="active"
+              active-color="#EB111F"
+              inactive-color="#000"
+              route
+            >
               <van-tabbar-item :vant-icon="24" icon="home-o" style="font-size: 11px;" to="/index">首页</van-tabbar-item>
               <van-tabbar-item icon="qr" style="font-size: 11px  ;height: 50px" to="/classify">分类</van-tabbar-item>
               <van-tabbar-item icon="shop-o" style="font-size: 11px  ;height: 50px" to="/shop">店铺</van-tabbar-item>
