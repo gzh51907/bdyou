@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-10-11 15:31:13
- * @LastEditTime: 2019-10-12 10:46:58
+ * @LastEditTime: 2019-10-12 10:51:17
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -31,7 +31,7 @@
               <van-tabbar-item icon="home-o" to="/index">首页</van-tabbar-item>
               <van-tabbar-item icon="qr" to="/classify">分类</van-tabbar-item>
               <van-tabbar-item icon="shop-o" to="/shop">店铺</van-tabbar-item>
-              <van-tabbar-item icon="shopping-cart-o" to="/cart" info="0">购物车</van-tabbar-item>
+              <van-tabbar-item icon="shopping-cart-o" to="/cart" :info="0">购物车</van-tabbar-item>
               <van-tabbar-item icon="contact" to="/mine">我的</van-tabbar-item>
             </van-tabbar>
           </footer>
@@ -46,7 +46,8 @@ export default {
   name: "app",
   data() {
     return {
-      active: "home"
+      active: "home",
+      info: "2"
     };
   },
   components: {},
