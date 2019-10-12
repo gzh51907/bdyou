@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-10-11 15:31:13
- * @LastEditTime: 2019-10-12 10:34:39
+ * @LastEditTime: 2019-10-12 10:46:58
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -25,9 +25,10 @@
               v-model="active"
               active-color="#EB111F"
               inactive-color="#000"
+              size="24px"
               route
             >
-              <van-tabbar-item icon="home-o" to="/index" size="24px">首页</van-tabbar-item>
+              <van-tabbar-item icon="home-o" to="/index">首页</van-tabbar-item>
               <van-tabbar-item icon="qr" to="/classify">分类</van-tabbar-item>
               <van-tabbar-item icon="shop-o" to="/shop">店铺</van-tabbar-item>
               <van-tabbar-item icon="shopping-cart-o" to="/cart" info="0">购物车</van-tabbar-item>
@@ -62,5 +63,10 @@ export default {
 }
 #app .van-grid-item__content--center span {
   margin: 0;
+}
+.van-tabbar-item__icon {
+  position: relative;
+  margin-bottom: 0px;
+  font-size: 24px;
 }
 </style>
