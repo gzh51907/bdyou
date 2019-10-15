@@ -14,15 +14,24 @@
       @selection-change="handleSelectionChange"
     >
       <el-table-column type="selection" width="55"></el-table-column>
-      <el-table-column label="注册时间" width="120">
+      <!-- <el-table-column label="注册时间" width="120">
         <template slot-scope="scope">{{ scope.row.regtime }}</template>
+      </el-table-column>-->
+      <el-table-column label="注册时间" prop="regtime" :formatter="CreateTime"></el-table-column>
+      <!-- <el-table-column prop="username" label="账号" width="120"></el-table-column> -->
+      <el-table-column label="账号" width="120">
+        <template slot-scope="scope">{{ scope.row.username }}</template>
       </el-table-column>
-      <el-table-column prop="username" label="账号" width="120"></el-table-column>
       <el-table-column prop="password" label="密码" width="120"></el-table-column>
-      <el-table-column prop="address" label="地址" show-overflow-tooltip></el-table-column>
       <el-table-column label="操作">
-        <template slot-scope>
-          <el-button size="mini" type="primary" plain icon="el-icon-edit" @click="handleDelete">注销账号</el-button>
+        <template slot-scope="scope">
+          <el-button
+            size="mini"
+            type="primary"
+            plain
+            icon="el-icon-edit"
+            @click="handleDelete(scope.row)"
+          >注销账号</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -35,24 +44,23 @@
 export default {
   data() {
     return {
-      tableData: [
-        {
-          regtime: "2016-05-03",
-          username: "admin",
-          password: "111111",
-          address: "上海市普陀区金沙江路 1518 弄"
-        },
-        {
-          regtime: "2016-05-03",
-          username: "admin",
-          password: "111111",
-          address: "上海市普陀区金沙江路 1518 弄"
-        }
-      ],
+      tableData: [],
       multipleSelection: []
     };
   },
+  mounted() {
+    this.getUserInfo();
+  },
   methods: {
+    async getUserInfo() {
+      let { data } = await this.$axios.get("http://localhost:2999/users/");
+      this.tableData = data;
+    },
+    // 时间转换
+    CreateTime(row, time) {
+      var date = row[time.property].replace("T", " ").split(".")[0];
+      return date;
+    },
     toggleSelection(rows) {
       if (rows) {
         rows.forEach(row => {
@@ -65,9 +73,26 @@ export default {
     handleSelectionChange(val) {
       this.multipleSelection = val;
     },
-    handleDelete() {
+    handleDelete(row) {
       // 注销当前账号
-      console.log(111);
+      this.$confirm("确认注销账号吗?", "提示", {
+        confirmButtonClass: "el-button--warning"
+      })
+        .then(async () => {
+          //确认
+          let { data } = await this.$axios.get(
+            "http://localhost:2999/users/logoff",
+            {
+              params: {
+                username: row.username
+              }
+            }
+          );
+          if (data.result.ok === 1) {
+            this.getUserInfo();
+          }
+        })
+        .catch(() => {});
     }
   }
 };

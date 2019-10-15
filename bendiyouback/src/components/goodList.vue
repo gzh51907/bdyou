@@ -20,37 +20,40 @@
       </el-form>
     </el-col>
     <!-- 商品列表 -->
-    <el-table :data="tableData" style="width: 100%">
+    <el-table
+      :data="tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)"
+      style="width: 100%"
+    >
       <el-table-column type="expand">
         <template slot-scope="props">
           <el-form label-position="left" inline class="demo-table-expand">
             <el-form-item label="商品名称">
-              <span>{{ props.row.name }}</span>
+              <span>{{ props.row.goods_name }}</span>
             </el-form-item>
             <el-form-item label="所属店铺">
-              <span>{{ props.row.shop }}</span>
+              <span>{{ props.row.store_name }}</span>
             </el-form-item>
             <el-form-item label="商品 ID">
-              <span>{{ props.row.id }}</span>
+              <span>{{ props.row.goods_id }}</span>
             </el-form-item>
             <el-form-item label="店铺 ID">
-              <span>{{ props.row.shopId }}</span>
+              <span>{{ props.row.store_id }}</span>
             </el-form-item>
-            <el-form-item label="商品分类">
-              <span>{{ props.row.category }}</span>
+            <el-form-item label="商品价格">
+              <span>{{ props.row.goods_promotion_price }}</span>
             </el-form-item>
-            <el-form-item label="店铺地址">
-              <span>{{ props.row.address }}</span>
+            <el-form-item label="图片路径">
+              <span>{{ props.row.goods_image }}</span>
             </el-form-item>
-            <el-form-item label="商品描述">
-              <span>{{ props.row.desc }}</span>
+            <el-form-item label="库存量">
+              <span>{{ props.row.sell_out }}</span>
             </el-form-item>
           </el-form>
         </template>
       </el-table-column>
-      <el-table-column label="商品 ID" prop="id"></el-table-column>
-      <el-table-column label="商品名称" prop="name"></el-table-column>
-      <el-table-column label="描述" prop="desc"></el-table-column>
+      <el-table-column label="商品 ID" prop="goods_id"></el-table-column>
+      <el-table-column label="商品名称" prop="goods_name"></el-table-column>
+      <el-table-column label="店铺名称" prop="store_name"></el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
           <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
@@ -59,13 +62,13 @@
       </el-table-column>
     </el-table>
     <!-- 分页 -->
-    <div class="block" style="text-align:center;margin-top:20px;">
+    <div class="block" style="margin-top:20px;">
       <el-pagination
         @current-change="handleCurrentChange"
         :current-page.sync="currentPage"
-        :page-size="10"
-        layout="prev, pager, next, jumper"
-        :total="1000"
+        :page-size="pagesize"
+        layout="total,prev, pager, next, jumper"
+        :total="tableData.length"
       ></el-pagination>
     </div>
   </div>
@@ -76,50 +79,23 @@ export default {
     return {
       // 搜索关键字
       currentPage: 1,
+      pagesize: 5,
       filters: {
         keyword: ""
       },
-      tableData: [
-        {
-          id: "12987122",
-          name: "好滋好味鸡蛋仔",
-          category: "江浙小吃、小吃零食",
-          desc: "荷兰优质淡奶，奶香浓而不腻",
-          address: "上海市普陀区真北路",
-          shop: "王小虎夫妻店",
-          shopId: "10333"
-        },
-        {
-          id: "12987123",
-          name: "好滋好味鸡蛋仔",
-          category: "江浙小吃、小吃零食",
-          desc: "荷兰优质淡奶，奶香浓而不腻",
-          address: "上海市普陀区真北路",
-          shop: "王小虎夫妻店",
-          shopId: "10333"
-        },
-        {
-          id: "12987125",
-          name: "好滋好味鸡蛋仔",
-          category: "江浙小吃、小吃零食",
-          desc: "荷兰优质淡奶，奶香浓而不腻",
-          address: "上海市普陀区真北路",
-          shop: "王小虎夫妻店",
-          shopId: "10333"
-        },
-        {
-          id: "12987126",
-          name: "好滋好味鸡蛋仔",
-          category: "江浙小吃、小吃零食",
-          desc: "荷兰优质淡奶，奶香浓而不腻",
-          address: "上海市普陀区真北路",
-          shop: "王小虎夫妻店",
-          shopId: "10333"
-        }
-      ]
+      tableData: []
     };
   },
+  mounted() {
+    this.getGoodsList();
+  },
   methods: {
+    // 查询所有数据
+    async getGoodsList() {
+      let { data } = await this.$axios.get("http://localhost:2999/goods/");
+      // console.log(data);
+      this.tableData = data;
+    },
     // 查询
     getUsers() {
       console.log("getUsers");
@@ -133,18 +109,41 @@ export default {
       // console.log(index, row);
       // console.log(Object.assign({}, row));
       var obj = Object.assign({}, row);
-      var urlId = obj.id;
+      var urlId = obj.goods_id;
       // console.log(urlId);
       this.$router.push("/goodList/editGoods/id=" + urlId);
     },
-    // 删除
+    // 删除商品
     handleDelete(index, row) {
-      console.log(index, row);
+      // console.log(index, row);
+      this.$confirm("确认删除当前商品吗?", "提示", {
+        confirmButtonClass: "el-button--warning"
+      })
+        .then(async () => {
+          //确认
+          let { data } = await this.$axios.delete(
+            "http://localhost:2999/goods/" + row.goods_id
+          );
+          if (data.result.ok === 1) {
+            this.$message({
+              type: "info",
+              message: "已成功修改"
+            });
+            this.getGoodsList();
+          }
+        })
+        .catch(() => {});
       // 请求数据库删除，通过id删除
+    },
+    // 分页-每页条数
+    handleSizeChange(val) {
+      // console.log(`每页${val}条`);
+      this.pagesize = val;
     },
     // 当前页
     handleCurrentChange(val) {
-      console.log(`当前页: ${val}`);
+      // console.log(`当前页: ${val}`);
+      this.currentPage = val;
     }
   }
 };
