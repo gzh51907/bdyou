@@ -7,7 +7,7 @@
  -->
 <template>
   <div>
-    <van-sticky>
+    <van-sticky z-index="9999">
       <header style=" background:#d50012" id="header">
         <van-row>
           <van-col span="24">
@@ -402,7 +402,7 @@ export default {
   margin-top: -20px;
 
   .I_bg {
-    z-index: 100;
+    z-index: 10;
     height: 150px;
 
     span {

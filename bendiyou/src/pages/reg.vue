@@ -1,13 +1,15 @@
 <template>
   <div>
     <div class="header">
-      <div class="header_left"></div>
+      <router-link to="/index">
+        <div class="header_left"></div>
+      </router-link>
       <div class="header_zhong">会员注册</div>
       <router-link to="/login">
         <div class="header_right">登录</div>
       </router-link>
     </div>
-    <div class="main">
+    <div class="main-a">
       <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px">
         <el-form-item label="用户名" prop="username">
           <el-input v-model="ruleForm.username"></el-input>
@@ -150,8 +152,9 @@ export default {
   margin-right: 15px;
   color: red;
 }
-.main {
+.main-a {
   background: #ffffff;
   padding: 10px 0 10px 0;
+  margin-top: 50px;
 }
 </style>

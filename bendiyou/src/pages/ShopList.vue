@@ -12,7 +12,9 @@
         <router-link to="/shop">
           <div class="header_l"></div>
         </router-link>
-        <div class="header_r"></div>
+        <router-link to="login">
+          <div class="header_r"></div>
+        </router-link>
       </div>
       <div class="goods-detail-pic">
         <img :src=" ShopList.goods_image" alt />

@@ -3,12 +3,14 @@
     <div id="location">
       <img src="../img/da.png" alt class="img1" />
       <img src="../img/daxing.png" alt class="img2" />
-      <img src="../img/wei.png" alt class="img3" />
+      <router-link to="login">
+        <img src="../img/wei.png" alt class="img3" />
+      </router-link>
     </div>
     <h4 class="front_title">附近商家</h4>
-    <div class="store_class_container">
-      <el-tabs type="border-card">
-        <el-tab-pane label="全部店铺">
+    <div class="store_class_container" style="margin-bottom:50px">
+      <el-tabs type="border-card" v-model="activeName" @tab-click="ShopList(activeName)">
+        <el-tab-pane label="全部店铺" name="0">
           <div class="store_container" v-for="item in classify" :key="item.goods_id">
             <div class="front_store_each">
               <div class="store_each_left">
@@ -41,7 +43,6 @@
                   </div>
                   <div class="store_goods_info">
                     <div class="store_goods_list">
-                      <!-- <router-link to="/ShopList"> -->
                       <div
                         class="goods_li"
                         v-for="item2 in item.store_goods_distinct"
@@ -54,7 +55,6 @@
                           <span class="store_goods_name">{{item2.goods_name}}</span>
                         </div>
                       </div>
-                      <!-- </router-link> -->
                     </div>
                   </div>
                 </div>
@@ -62,14 +62,420 @@
             </div>
           </div>
         </el-tab-pane>
-        <el-tab-pane label="综合商超类">2</el-tab-pane>
-        <el-tab-pane label="生鲜水果类">3</el-tab-pane>
-        <el-tab-pane label="酒水副食类">4</el-tab-pane>
-        <el-tab-pane label="3C数码类">5</el-tab-pane>
-        <el-tab-pane label="美妆个护类">6</el-tab-pane>
-        <el-tab-pane label="花卉宠物类">7</el-tab-pane>
-        <el-tab-pane label="服装童装类">8</el-tab-pane>
-        <el-tab-pane label="工农器具类">9</el-tab-pane>
+        <el-tab-pane label="综合商超类" name="14">
+          <div class="store_container" v-for="item in classify" :key="item.goods_id">
+            <div class="front_store_each">
+              <div class="store_each_left">
+                <img :src="item.store_avatar" alt />
+              </div>
+              <div class="store_each_right">
+                <div class="store_each_name">
+                  <h4>{{item.store_name}}</h4>
+                  <div class="store_time_distance">
+                    <span class="right_small_text">{{item.distance_info.distance}}</span>
+                    <span class="right_small_text">{{item.distance_info.duration}}</span>
+                  </div>
+                  <div class="store_credit">
+                    <span class="right_small_text">信用度：</span>
+                    <div class="store_credit_star">
+                      <img src="../img/xing.png" alt />
+                      <img src="../img/xing.png" alt />
+                      <img src="../img/xing.png" alt />
+                      <img src="../img/xing.png" alt />
+                      <img src="../img/xing.png" alt />
+                    </div>
+                  </div>
+                  <div class="store_sale_amount">
+                    <span class="right_small_text">商品数量{{item.goods_count}}件</span>
+                    <span class="right_small_text">最近成交{{item.num_sales_jq}}笔</span>
+                  </div>
+                  <div class="store_favorable_rate">
+                    <span class="right_small_text">好评率：</span>
+                    <span class="right_small_text">{{item.store_ate_acclaim}}%</span>
+                  </div>
+                  <div class="store_goods_info">
+                    <div class="store_goods_list">
+                      <div
+                        class="goods_li"
+                        v-for="item2 in item.store_goods_distinct"
+                        :key="item2.goods_id"
+                        @click="goto(item2.goods_id)"
+                      >
+                        <img :src="item2.goods_image_url" alt />
+                        <div class="store_goods_each">
+                          <span class="store_goods_price">￥{{item2.goods_price}}</span>
+                          <span class="store_goods_name">{{item2.goods_name}}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </el-tab-pane>
+        <el-tab-pane label="生鲜水果类" name="3">
+          <div class="store_container" v-for="item in classify" :key="item.goods_id">
+            <div class="front_store_each">
+              <div class="store_each_left">
+                <img :src="item.store_avatar" alt />
+              </div>
+              <div class="store_each_right">
+                <div class="store_each_name">
+                  <h4>{{item.store_name}}</h4>
+                  <div class="store_time_distance">
+                    <span class="right_small_text">{{item.distance_info.distance}}</span>
+                    <span class="right_small_text">{{item.distance_info.duration}}</span>
+                  </div>
+                  <div class="store_credit">
+                    <span class="right_small_text">信用度：</span>
+                    <div class="store_credit_star">
+                      <img src="../img/xing.png" alt />
+                      <img src="../img/xing.png" alt />
+                      <img src="../img/xing.png" alt />
+                      <img src="../img/xing.png" alt />
+                      <img src="../img/xing.png" alt />
+                    </div>
+                  </div>
+                  <div class="store_sale_amount">
+                    <span class="right_small_text">商品数量{{item.goods_count}}件</span>
+                    <span class="right_small_text">最近成交{{item.num_sales_jq}}笔</span>
+                  </div>
+                  <div class="store_favorable_rate">
+                    <span class="right_small_text">好评率：</span>
+                    <span class="right_small_text">{{item.store_ate_acclaim}}%</span>
+                  </div>
+                  <div class="store_goods_info">
+                    <div class="store_goods_list">
+                      <div
+                        class="goods_li"
+                        v-for="item2 in item.store_goods_distinct"
+                        :key="item2.goods_id"
+                        @click="goto(item2.goods_id)"
+                      >
+                        <img :src="item2.goods_image_url" alt />
+                        <div class="store_goods_each">
+                          <span class="store_goods_price">￥{{item2.goods_price}}</span>
+                          <span class="store_goods_name">{{item2.goods_name}}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </el-tab-pane>
+        <el-tab-pane label="酒水副食类" name="4">
+          <div class="store_container" v-for="item in classify" :key="item.goods_id">
+            <div class="front_store_each">
+              <div class="store_each_left">
+                <img :src="item.store_avatar" alt />
+              </div>
+              <div class="store_each_right">
+                <div class="store_each_name">
+                  <h4>{{item.store_name}}</h4>
+                  <div class="store_time_distance">
+                    <span class="right_small_text">{{item.distance_info.distance}}</span>
+                    <span class="right_small_text">{{item.distance_info.duration}}</span>
+                  </div>
+                  <div class="store_credit">
+                    <span class="right_small_text">信用度：</span>
+                    <div class="store_credit_star">
+                      <img src="../img/xing.png" alt />
+                      <img src="../img/xing.png" alt />
+                      <img src="../img/xing.png" alt />
+                      <img src="../img/xing.png" alt />
+                      <img src="../img/xing.png" alt />
+                    </div>
+                  </div>
+                  <div class="store_sale_amount">
+                    <span class="right_small_text">商品数量{{item.goods_count}}件</span>
+                    <span class="right_small_text">最近成交{{item.num_sales_jq}}笔</span>
+                  </div>
+                  <div class="store_favorable_rate">
+                    <span class="right_small_text">好评率：</span>
+                    <span class="right_small_text">{{item.store_ate_acclaim}}%</span>
+                  </div>
+                  <div class="store_goods_info">
+                    <div class="store_goods_list">
+                      <div
+                        class="goods_li"
+                        v-for="item2 in item.store_goods_distinct"
+                        :key="item2.goods_id"
+                        @click="goto(item2.goods_id)"
+                      >
+                        <img :src="item2.goods_image_url" alt />
+                        <div class="store_goods_each">
+                          <span class="store_goods_price">￥{{item2.goods_price}}</span>
+                          <span class="store_goods_name">{{item2.goods_name}}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </el-tab-pane>
+        <el-tab-pane label="3C数码类" name="7"><div class="store_container" v-for="item in classify" :key="item.goods_id">
+            <div class="front_store_each">
+              <div class="store_each_left">
+                <img :src="item.store_avatar" alt />
+              </div>
+              <div class="store_each_right">
+                <div class="store_each_name">
+                  <h4>{{item.store_name}}</h4>
+                  <div class="store_time_distance">
+                    <span class="right_small_text">{{item.distance_info.distance}}</span>
+                    <span class="right_small_text">{{item.distance_info.duration}}</span>
+                  </div>
+                  <div class="store_credit">
+                    <span class="right_small_text">信用度：</span>
+                    <div class="store_credit_star">
+                      <img src="../img/xing.png" alt />
+                      <img src="../img/xing.png" alt />
+                      <img src="../img/xing.png" alt />
+                      <img src="../img/xing.png" alt />
+                      <img src="../img/xing.png" alt />
+                    </div>
+                  </div>
+                  <div class="store_sale_amount">
+                    <span class="right_small_text">商品数量{{item.goods_count}}件</span>
+                    <span class="right_small_text">最近成交{{item.num_sales_jq}}笔</span>
+                  </div>
+                  <div class="store_favorable_rate">
+                    <span class="right_small_text">好评率：</span>
+                    <span class="right_small_text">{{item.store_ate_acclaim}}%</span>
+                  </div>
+                  <div class="store_goods_info">
+                    <div class="store_goods_list">
+                      <div
+                        class="goods_li"
+                        v-for="item2 in item.store_goods_distinct"
+                        :key="item2.goods_id"
+                        @click="goto(item2.goods_id)"
+                      >
+                        <img :src="item2.goods_image_url" alt />
+                        <div class="store_goods_each">
+                          <span class="store_goods_price">￥{{item2.goods_price}}</span>
+                          <span class="store_goods_name">{{item2.goods_name}}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div></el-tab-pane>
+        <el-tab-pane label="美妆个护类" name="9">
+          <div class="store_container" v-for="item in classify" :key="item.goods_id">
+            <div class="front_store_each">
+              <div class="store_each_left">
+                <img :src="item.store_avatar" alt />
+              </div>
+              <div class="store_each_right">
+                <div class="store_each_name">
+                  <h4>{{item.store_name}}</h4>
+                  <div class="store_time_distance">
+                    <span class="right_small_text">{{item.distance_info.distance}}</span>
+                    <span class="right_small_text">{{item.distance_info.duration}}</span>
+                  </div>
+                  <div class="store_credit">
+                    <span class="right_small_text">信用度：</span>
+                    <div class="store_credit_star">
+                      <img src="../img/xing.png" alt />
+                      <img src="../img/xing.png" alt />
+                      <img src="../img/xing.png" alt />
+                      <img src="../img/xing.png" alt />
+                      <img src="../img/xing.png" alt />
+                    </div>
+                  </div>
+                  <div class="store_sale_amount">
+                    <span class="right_small_text">商品数量{{item.goods_count}}件</span>
+                    <span class="right_small_text">最近成交{{item.num_sales_jq}}笔</span>
+                  </div>
+                  <div class="store_favorable_rate">
+                    <span class="right_small_text">好评率：</span>
+                    <span class="right_small_text">{{item.store_ate_acclaim}}%</span>
+                  </div>
+                  <div class="store_goods_info">
+                    <div class="store_goods_list">
+                      <div
+                        class="goods_li"
+                        v-for="item2 in item.store_goods_distinct"
+                        :key="item2.goods_id"
+                        @click="goto(item2.goods_id)"
+                      >
+                        <img :src="item2.goods_image_url" alt />
+                        <div class="store_goods_each">
+                          <span class="store_goods_price">￥{{item2.goods_price}}</span>
+                          <span class="store_goods_name">{{item2.goods_name}}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </el-tab-pane>
+        <el-tab-pane label="花卉宠物类" name="11">
+          <div class="store_container" v-for="item in classify" :key="item.goods_id">
+            <div class="front_store_each">
+              <div class="store_each_left">
+                <img :src="item.store_avatar" alt />
+              </div>
+              <div class="store_each_right">
+                <div class="store_each_name">
+                  <h4>{{item.store_name}}</h4>
+                  <div class="store_time_distance">
+                    <span class="right_small_text">{{item.distance_info.distance}}</span>
+                    <span class="right_small_text">{{item.distance_info.duration}}</span>
+                  </div>
+                  <div class="store_credit">
+                    <span class="right_small_text">信用度：</span>
+                    <div class="store_credit_star">
+                      <img src="../img/xing.png" alt />
+                      <img src="../img/xing.png" alt />
+                      <img src="../img/xing.png" alt />
+                      <img src="../img/xing.png" alt />
+                      <img src="../img/xing.png" alt />
+                    </div>
+                  </div>
+                  <div class="store_sale_amount">
+                    <span class="right_small_text">商品数量{{item.goods_count}}件</span>
+                    <span class="right_small_text">最近成交{{item.num_sales_jq}}笔</span>
+                  </div>
+                  <div class="store_favorable_rate">
+                    <span class="right_small_text">好评率：</span>
+                    <span class="right_small_text">{{item.store_ate_acclaim}}%</span>
+                  </div>
+                  <div class="store_goods_info">
+                    <div class="store_goods_list">
+                      <div
+                        class="goods_li"
+                        v-for="item2 in item.store_goods_distinct"
+                        :key="item2.goods_id"
+                        @click="goto(item2.goods_id)"
+                      >
+                        <img :src="item2.goods_image_url" alt />
+                        <div class="store_goods_each">
+                          <span class="store_goods_price">￥{{item2.goods_price}}</span>
+                          <span class="store_goods_name">{{item2.goods_name}}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </el-tab-pane>
+        <el-tab-pane label="服装童装类" name="13">
+          <div class="store_container" v-for="item in classify" :key="item.goods_id">
+            <div class="front_store_each">
+              <div class="store_each_left">
+                <img :src="item.store_avatar" alt />
+              </div>
+              <div class="store_each_right">
+                <div class="store_each_name">
+                  <h4>{{item.store_name}}</h4>
+                  <div class="store_time_distance">
+                    <span class="right_small_text">{{item.distance_info.distance}}</span>
+                    <span class="right_small_text">{{item.distance_info.duration}}</span>
+                  </div>
+                  <div class="store_credit">
+                    <span class="right_small_text">信用度：</span>
+                    <div class="store_credit_star">
+                      <img src="../img/xing.png" alt />
+                      <img src="../img/xing.png" alt />
+                      <img src="../img/xing.png" alt />
+                      <img src="../img/xing.png" alt />
+                      <img src="../img/xing.png" alt />
+                    </div>
+                  </div>
+                  <div class="store_sale_amount">
+                    <span class="right_small_text">商品数量{{item.goods_count}}件</span>
+                    <span class="right_small_text">最近成交{{item.num_sales_jq}}笔</span>
+                  </div>
+                  <div class="store_favorable_rate">
+                    <span class="right_small_text">好评率：</span>
+                    <span class="right_small_text">{{item.store_ate_acclaim}}%</span>
+                  </div>
+                  <div class="store_goods_info">
+                    <div class="store_goods_list">
+                      <div
+                        class="goods_li"
+                        v-for="item2 in item.store_goods_distinct"
+                        :key="item2.goods_id"
+                        @click="goto(item2.goods_id)"
+                      >
+                        <img :src="item2.goods_image_url" alt />
+                        <div class="store_goods_each">
+                          <span class="store_goods_price">￥{{item2.goods_price}}</span>
+                          <span class="store_goods_name">{{item2.goods_name}}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </el-tab-pane>
+        <el-tab-pane label="工农器具类" name="18">
+          <div class="store_container" v-for="item in classify" :key="item.goods_id">
+            <div class="front_store_each">
+              <div class="store_each_left">
+                <img :src="item.store_avatar" alt />
+              </div>
+              <div class="store_each_right">
+                <div class="store_each_name">
+                  <h4>{{item.store_name}}</h4>
+                  <div class="store_time_distance">
+                    <span class="right_small_text">{{item.distance_info.distance}}</span>
+                    <span class="right_small_text">{{item.distance_info.duration}}</span>
+                  </div>
+                  <div class="store_credit">
+                    <span class="right_small_text">信用度：</span>
+                    <div class="store_credit_star">
+                      <img src="../img/xing.png" alt />
+                      <img src="../img/xing.png" alt />
+                      <img src="../img/xing.png" alt />
+                      <img src="../img/xing.png" alt />
+                      <img src="../img/xing.png" alt />
+                    </div>
+                  </div>
+                  <div class="store_sale_amount">
+                    <span class="right_small_text">商品数量{{item.goods_count}}件</span>
+                    <span class="right_small_text">最近成交{{item.num_sales_jq}}笔</span>
+                  </div>
+                  <div class="store_favorable_rate">
+                    <span class="right_small_text">好评率：</span>
+                    <span class="right_small_text">{{item.store_ate_acclaim}}%</span>
+                  </div>
+                  <div class="store_goods_info">
+                    <div class="store_goods_list">
+                      <div
+                        class="goods_li"
+                        v-for="item2 in item.store_goods_distinct"
+                        :key="item2.goods_id"
+                        @click="goto(item2.goods_id)"
+                      >
+                        <img :src="item2.goods_image_url" alt />
+                        <div class="store_goods_each">
+                          <span class="store_goods_price">￥{{item2.goods_price}}</span>
+                          <span class="store_goods_name">{{item2.goods_name}}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </el-tab-pane>
       </el-tabs>
     </div>
   </div>
@@ -78,39 +484,71 @@
 export default {
   data() {
     return {
-      classify: []
+      classify: [],
+      activeName: "0",
+      i: "0"
     };
   },
+  created() {
+    //发送ajax请求
+    // console.log(111);
+    this.ShopList("0");
 
+    // let {
+    //   data: {
+    //     datas: { store_list }
+    //   }
+    // } = await this.$axios.get("https://s.bdyoo.com/mobile/index.php", {
+    //   params: {
+    //     act: "store_list",
+    //     curpage: " 1",
+    //     sc_id: "0",
+    //     lat: "",
+    //     lng: ""
+    //   }
+    // });
+    // // console.log(store_list);
+    // //数据
+    // // this.classify = store_list;
+
+    // store_list.forEach(item => {
+    //   this.classify.push(item);
+    // });
+
+    // console.log(this.classify);
+  },
   methods: {
     goto(id) {
       this.$router.push({ name: "shopList", params: { id } });
+    },
+    async ShopList(i) {
+      //发送ajax请求
+      this.classify = [];
+
+      // console.log(i);
+      let {
+        data: {
+          datas: { store_list }
+        }
+      } = await this.$axios.get("https://s.bdyoo.com/mobile/index.php", {
+        params: {
+          act: "store_list",
+          curpage: "1",
+          sc_id: i,
+          lat: "",
+          lng: ""
+        }
+      });
+
+      //数据
+      // this.classify = store_list;
+
+      store_list.forEach(item => {
+        this.classify.push(item);
+      });
+
+      // console.log(this.classify);
     }
-  },
-  async created() {
-    //发送ajax请求
-    let {
-      data: {
-        datas: { store_list }
-      }
-    } = await this.$axios.get("https://s.bdyoo.com/mobile/index.php", {
-      params: {
-        act: "store_list",
-        curpage: "1",
-        sc_id: "0",
-        lat: "",
-        lng: ""
-      }
-    });
-    // console.log(store_list);
-    //数据
-    // this.classify = store_list;
-
-    store_list.forEach(item => {
-      this.classify.push(item);
-    });
-
-    // console.log(this.classify);
   }
 };
 </script>
@@ -257,9 +695,9 @@ export default {
 }
 .store_credit {
   line-height: 12px;
-  padding: 2px 0;
-  margin-top: 2px;
-  margin-bottom: 1.2rem;
+  // padding: 2px 0;
+  // margin-top: 2px;
+  // margin-bottom: 1.2rem;
 }
 .store_credit_star {
   display: inline-block;
@@ -286,8 +724,8 @@ export default {
   position: relative;
 }
 .goods_li {
-  height: 4.8rem;
-  width: 3.6rem !important;
+  height: 5rem;
+  width: 3.1rem !important;
   margin-right: 4px;
   margin-top: 6px;
   float: left;

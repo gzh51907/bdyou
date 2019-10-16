@@ -172,8 +172,8 @@
       </div>
       <div style=" margin-bottom: 100px;margin-top:20px">
         <div class="nav-text">
-          <a href="###">登录</a>
-          <a href="###">注册</a>
+          <a href="###" @click="goto('/login')">登录</a>
+          <a href="###"  @click="goto('/reg')">注册</a>
           <a href="###">商家中心</a>
           <a href="###">反馈</a>
         </div>
