@@ -20,6 +20,7 @@ import {
   Row,
   Col,
   Tabbar,
+<<<<<<< HEAD
   TabbarItem,
   Sticky,
   List,
@@ -45,6 +46,15 @@ import {
   DropdownMenu,
   DropdownItem
 } from "vant";
+=======
+  TabbarItem
+} from 'vant';
+import axios from 'axios';
+Vue.prototype.$axios = axios;
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+Vue.use(ElementUI);
+>>>>>>> 1cc8f3bd378aa14516628d56655eb58c3c63b45f
 
 Vue.use(Grid)
   .use(GridItem)
