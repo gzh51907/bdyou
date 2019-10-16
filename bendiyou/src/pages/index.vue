@@ -2,12 +2,12 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-10-12 09:19:13
- * @LastEditTime: 2019-10-16 15:09:45
+ * @LastEditTime: 2019-10-16 19:01:45
  * @LastEditors: Please set LastEditors
  -->
 <template>
   <div>
-    <van-sticky>
+    <van-sticky z-index="9999">
       <header style=" background:#d50012" id="header">
         <van-row>
           <van-col span="24">

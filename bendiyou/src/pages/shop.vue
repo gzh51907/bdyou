@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-10-12 09:48:38
+ * @LastEditTime: 2019-10-12 09:48:38
+ * @LastEditors: your name
+ -->
 <template>
   <div id="app">
     <div id="location">
@@ -6,7 +13,7 @@
       <img src="../img/wei.png" alt class="img3" />
     </div>
     <h4 class="front_title">附近商家</h4>
-    <div class="store_class_container">
+    <div class="store_class_container" style="margin-bottom:50px">
       <el-tabs type="border-card">
         <el-tab-pane label="全部店铺">
           <div class="store_container" v-for="item in classify" :key="item.goods_id">
