@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-10-12 09:48:38
+ * @LastEditTime: 2019-10-12 09:48:38
+ * @LastEditors: your name
+ -->
 <template>
   <div id="app">
     <div id="location">
@@ -9,6 +16,7 @@
     </div>
     <h4 class="front_title">附近商家</h4>
     <div class="store_class_container" style="margin-bottom:50px">
+<<<<<<< HEAD
       <el-tabs type="border-card" v-model="activeName" @tab-click="ShopList(activeName)">
         <el-tab-pane label="全部店铺" name="0">
           <div class="store_container" v-for="item in classify" :key="item.goods_id">
@@ -425,6 +433,10 @@
           </div>
         </el-tab-pane>
         <el-tab-pane label="工农器具类" name="18">
+=======
+      <el-tabs type="border-card">
+        <el-tab-pane label="全部店铺">
+>>>>>>> c6d735b2faa3720681e8b836ca0e27d980e6f80e
           <div class="store_container" v-for="item in classify" :key="item.goods_id">
             <div class="front_store_each">
               <div class="store_each_left">

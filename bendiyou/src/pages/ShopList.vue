@@ -2,11 +2,11 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-10-12 09:52:26
- * @LastEditTime: 2019-10-16 18:29:52
+ * @LastEditTime: 2019-10-16 18:43:51
  * @LastEditors: Please set LastEditors
  -->
 <template>
-  <div>
+  <div style="margin-bottom:50px">
     <div style="position: relative;">
       <div id="header">
         <router-link to="/shop">
