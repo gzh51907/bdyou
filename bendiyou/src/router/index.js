@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-10-12 09:31:36
- * @LastEditTime: 2019-10-12 09:53:40
+ * @LastEditTime: 2019-10-16 15:09:26
  * @LastEditors: Please set LastEditors
  */
 import Vue from 'vue'
@@ -18,11 +18,17 @@ import Mine from '../pages/mine.vue'
 import Reg from '../pages/reg.vue'
 import Shop from '../pages/shop.vue'
 import ShopList from '../pages/ShopList.vue'
+import GoodsList from '../pages/goosList.vue'
 let router = new VueRouter({
     routes: [{
         name: "index",
         path: "/index",
         component: Index
+
+    }, {
+        name: "goodsList",
+        path: "/goodsList",
+        component: GoodsList
 
     }, {
         name: "cart",
@@ -69,6 +75,9 @@ let router = new VueRouter({
         path: "/mine",
         component: Mine
 
+    }, {
+        path: '/',
+        redirect: '/index'
     }]
 })
 export default router
