@@ -124,6 +124,5 @@ export default {
   border-color: #ee0a24;
   background-color: #fff;
   color: #ee0a24;
-  line-height: 100%;
 }
 </style>

@@ -117,9 +117,7 @@ export default {
     goto(path) {
       this.$router.push(path);
     },
-    onClickLeft() {
-      Toast("返回");
-    }
+    onClickLeft() {}
   }
 };
 </script>
