@@ -144,7 +144,8 @@ export default {
       }
     });
     this.ShopList = datas;
-    // console.log(datas);
+   
+    // console.log(this.ShopList.goods_info.goods_name);
   }
 };
 </script>

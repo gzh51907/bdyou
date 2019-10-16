@@ -110,7 +110,7 @@ export default {
       this.classify.push(item);
     });
 
-    console.log(this.classify);
+    // console.log(this.classify);
   }
 };
 </script>
