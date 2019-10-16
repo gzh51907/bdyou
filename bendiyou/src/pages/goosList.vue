@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-10-16 15:05:26
- * @LastEditTime: 2019-10-16 17:44:29
+ * @LastEditTime: 2019-10-16 18:40:06
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -49,7 +49,8 @@
         </van-row>
       </div>
     </header>
-    <main>
+    <main style="margin-top: 100px;
+  margin-bottom: 50px;">
       <ul class="goods-list" style="background-color: #f5f5f5;">
         <van-grid :border="false" :column-num="2" gutter="8">
           <van-grid-item style="margin-bottom:5px;" v-for="(item,index) in goodsdata" :key="index">
@@ -121,7 +122,7 @@ export default {
   }
 };
 </script>
-<style lang="scss">
+<style lang="scss"  >
 .van-ellipsis {
   font-size: 0.65rem;
 }
@@ -217,7 +218,5 @@ export default {
   }
 }
 main {
-  margin-top: 100px;
-  margin-bottom: 50px;
 }
 </style>

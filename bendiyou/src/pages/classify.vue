@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-10-12 09:29:58
- * @LastEditTime: 2019-10-16 17:16:36
+ * @LastEditTime: 2019-10-16 18:32:18
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -117,7 +117,7 @@ export default {
   }
 };
 </script>
-<style lang="scss">
+<style lang="scss" >
 .van-sidebar-item--select {
   color: #323233;
   font-weight: 500;

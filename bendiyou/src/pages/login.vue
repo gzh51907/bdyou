@@ -77,7 +77,7 @@ export default {
   }
 };
 </script>
-<style lang="scss">
+<style lang="scss" >
 .L_box1 {
   padding: 1rem 2rem 0 2rem;
   line-height: 0.9rem;

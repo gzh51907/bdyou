@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-10-12 09:25:31
- * @LastEditTime: 2019-10-16 17:49:23
+ * @LastEditTime: 2019-10-16 18:30:27
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -40,7 +40,7 @@ export default {
   }
 };
 </script>
-<style lang="scss">
+<style lang="scss" >
 main {
   width: 100%;
   height: 100%;

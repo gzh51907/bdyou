@@ -2,32 +2,32 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-10-12 09:25:22
- * @LastEditTime: 2019-10-15 20:18:39
+ * @LastEditTime: 2019-10-16 18:38:10
  * @LastEditors: Please set LastEditors
  -->
 
 <template>
   <div>
-    <header class="header">
-      <div style=" float: right;">
-        <van-icon
-          color="#fff"
-          name="setting-o"
-          size="1.5em"
-          style=" width: 1.95rem;
+    <main style="margin:0">
+      <header class="header">
+        <div style=" float: right;">
+          <van-icon
+            color="#fff"
+            name="setting-o"
+            size="1.5em"
+            style=" width: 1.95rem;
     height: 1.95rem;line-height: 1.95rem;margin-right:0.5rem"
-        />
-        <van-icon
-          color="#fff"
-          name="chat-o"
-          size="1.5em"
-          style=" width: 1.95rem ;
+          />
+          <van-icon
+            color="#fff"
+            name="chat-o"
+            size="1.5em"
+            style=" width: 1.95rem ;
         height: 1.95rem; color:#fff; line-height: 1.95rem;"
-          @click="goto('/login')"
-        />
-      </div>
-    </header>
-    <main>
+            @click="goto('/login')"
+          />
+        </div>
+      </header>
       <div class="H_box">
         <div class="member-info">
           <a @click="goto('/login')" class="default-avatar"></a>
@@ -206,6 +206,7 @@ export default {
   line-height: 2rem;
 }
 main {
+  margin: 0;
   .H_box {
     background: url("../assets/images/ia_100000002.png");
     height: 10rem !important;
@@ -302,7 +303,6 @@ main {
   .member-collect {
     font-size: 0;
     height: 3rem;
-
     background: rgba(0, 0, 0, 0.1);
     position: absolute;
     bottom: 0;

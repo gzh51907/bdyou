@@ -389,7 +389,7 @@ export default {
   }
 };
 </script>
-<style lang="scss">
+<style lang="scss" >
 .bg {
   background-color: #d50012;
   text-align: center;

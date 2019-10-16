@@ -2,8 +2,8 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-10-12 09:52:26
- * @LastEditTime: 2019-10-12 09:52:26
- * @LastEditors: your name
+ * @LastEditTime: 2019-10-16 18:29:52
+ * @LastEditors: Please set LastEditors
  -->
 <template>
   <div>
@@ -144,12 +144,12 @@ export default {
       }
     });
     this.ShopList = datas;
-   
+
     // console.log(this.ShopList.goods_info.goods_name);
   }
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped >
 #header {
   height: 2rem;
   position: absolute;
