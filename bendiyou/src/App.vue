@@ -19,7 +19,7 @@
       </el-backtop>
       <div>
         <van-row type="flex" class="ap">
-          <van-col span="24" style="  position: fixed;left: 0;bottom: 0;z-index:9999 ">
+          <van-col span="24" style="  position: fixed;left: 0;bottom: 0;z-index:1200 ">
             <footer>
               <van-tabbar
                 style=" background-color: #fff!important;

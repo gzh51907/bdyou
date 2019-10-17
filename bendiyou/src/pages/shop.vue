@@ -16,7 +16,6 @@
     </div>
     <h4 class="front_title">附近商家</h4>
     <div class="store_class_container" style="margin-bottom:50px">
-<<<<<<< HEAD
       <el-tabs type="border-card" v-model="activeName" @tab-click="ShopList(activeName)">
         <el-tab-pane label="全部店铺" name="0">
           <div class="store_container" v-for="item in classify" :key="item.goods_id">
@@ -226,7 +225,8 @@
             </div>
           </div>
         </el-tab-pane>
-        <el-tab-pane label="3C数码类" name="7"><div class="store_container" v-for="item in classify" :key="item.goods_id">
+        <el-tab-pane label="3C数码类" name="7">
+          <div class="store_container" v-for="item in classify" :key="item.goods_id">
             <div class="front_store_each">
               <div class="store_each_left">
                 <img :src="item.store_avatar" alt />
@@ -275,7 +275,8 @@
                 </div>
               </div>
             </div>
-          </div></el-tab-pane>
+          </div>
+        </el-tab-pane>
         <el-tab-pane label="美妆个护类" name="9">
           <div class="store_container" v-for="item in classify" :key="item.goods_id">
             <div class="front_store_each">
@@ -433,10 +434,6 @@
           </div>
         </el-tab-pane>
         <el-tab-pane label="工农器具类" name="18">
-=======
-      <el-tabs type="border-card">
-        <el-tab-pane label="全部店铺">
->>>>>>> c6d735b2faa3720681e8b836ca0e27d980e6f80e
           <div class="store_container" v-for="item in classify" :key="item.goods_id">
             <div class="front_store_each">
               <div class="store_each_left">
