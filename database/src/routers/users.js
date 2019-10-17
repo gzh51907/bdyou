@@ -47,8 +47,9 @@ Router.get('/login', async (req, res) => {
     let {
         username,
         password,
-        mdl
+        checked2
     } = req.query;
+    // console.log(req.query);
     let result = await mongo.find('user', {
         username,
         password
@@ -56,9 +57,10 @@ Router.get('/login', async (req, res) => {
     if (result.length > 0) {
         // 如用户需要免登陆操作，则生成一个token并返回给前端
         let Authorization
-        if (mdl) {
+        if (checked2) {
             Authorization = token.create(username)
         }
+        console.log(Authorization);
         res.send(formatData({
             data: Authorization
         }));

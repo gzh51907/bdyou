@@ -48,7 +48,7 @@ export default {
       multipleSelection: []
     };
   },
-  mounted() {
+  created() {
     this.getUserInfo();
   },
   methods: {
@@ -89,6 +89,10 @@ export default {
             }
           );
           if (data.result.ok === 1) {
+            this.$message({
+              type: "info",
+              message: "注销成功！"
+            });
             this.getUserInfo();
           }
         })

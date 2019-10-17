@@ -11,7 +11,7 @@ let {
     secret
 } = require('../config.json');
 
-function create(data, expiresIn = 1200) {
+function create(data, expiresIn = '30D') {
     let token = jwt.sign({
         data
     }, secret, {

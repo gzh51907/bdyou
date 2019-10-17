@@ -72,7 +72,7 @@ Router.post('/change', async (req, res) => {
 
 // 添加商品数据
 Router.post('/add', async (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
     let {
         goods_id,
         goods_name,
