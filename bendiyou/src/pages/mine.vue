@@ -206,7 +206,6 @@ export default {
   line-height: 2rem;
 }
 main {
-  margin: 0;
   .H_box {
     background: url("../assets/images/ia_100000002.png");
     height: 10rem !important;

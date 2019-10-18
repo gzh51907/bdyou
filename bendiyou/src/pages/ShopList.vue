@@ -6,7 +6,7 @@
  * @LastEditors: Please set LastEditors
  -->
 <template>
-  <div style="margin-bottom:50px">
+  <div>
     <div style="position: relative;">
       <div id="header">
         <router-link to="/shop">

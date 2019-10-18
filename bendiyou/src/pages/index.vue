@@ -2,12 +2,12 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-10-12 09:19:13
- * @LastEditTime: 2019-10-16 19:01:45
+ * @LastEditTime: 2019-10-17 21:00:42
  * @LastEditors: Please set LastEditors
  -->
 <template>
   <div>
-    <van-sticky z-index="9999">
+    <van-sticky :z-index="1500">
       <header style=" background:#d50012" id="header">
         <van-row>
           <van-col span="24">
@@ -328,7 +328,12 @@
                 <dd class="goods-price">
                   ￥
                   <em>{{item.goods_promotion_price}}</em>
-                  <van-icon name="add" class="quick_add_cart" size="2em"></van-icon>
+                  <van-icon
+                    name="add"
+                    class="quick_add_cart"
+                    size="2em"
+                    @click="addcart(item.goods_id)"
+                  ></van-icon>
                 </dd>
               </dl>
             </li>
@@ -359,7 +364,8 @@ export default {
       list: [],
       loading: false,
       finished: false,
-      goodsdata: []
+      goodsdata: [],
+      goods: {}
     };
   },
   async created() {
@@ -385,6 +391,36 @@ export default {
     },
     goto(path) {
       this.$router.push(path);
+    },
+    async addcart(id) {
+      window.console.log(id);
+      // let currentGoods = this.$store.state.cart.cartList.forEach(element => {
+      //   if (id === element.goods_id) return 1;
+      // });
+      let currentGoods = this.$store.state.cart.cartList.filter(
+        item => item.goods_id === id
+      )[0];
+      if (currentGoods) {
+        let qty = currentGoods.qty++;
+        this.$store.commit("changeQty", { id, qty });
+        window.console.log(qty);
+      } else {
+        let datas = await this.$axios.get(
+          "http://10.3.133.30:2999/goods/" + id
+        );
+        this.goods = datas.data[0];
+        window.console.log(this.goods);
+        let good = {
+          goods_id: id,
+          goods_image: this.goods.goods_image,
+          goods_name: this.goods.goods_name,
+          goods_promotion_price: this.goods.goods_promotion_price,
+          qty: this.goods.sell_out,
+          shopid: this.goods.store_id,
+          shopname: this.goods.store_name
+        };
+        this.$store.commit("adcart", good);
+      }
     }
   }
 };
@@ -441,6 +477,7 @@ export default {
 }
 .goods-list {
   margin-bottom: 0 !important;
+
   li {
     background-color: #fff;
     vertical-align: top;
@@ -489,6 +526,7 @@ export default {
       margin-top: 0.4rem;
       color: #db4453;
       border-top: solid 0.05rem #eee;
+
       em {
         font-size: 0.7rem;
         font-weight: 600;

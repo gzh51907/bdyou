@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-10-11 15:31:13
- * @LastEditTime: 2019-10-16 18:35:10
+ * @LastEditTime: 2019-10-17 13:56:50
  * @LastEditors: Please set LastEditors
  */
 import Vue from "vue";
@@ -44,6 +44,7 @@ import {
   CellGroup,
   DropdownMenu,
   DropdownItem,
+  Stepper,
 
 } from 'vant';
 import axios from 'axios';
@@ -51,6 +52,10 @@ Vue.prototype.$axios = axios;
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import base from './assets/css/base.css'
+import Vuex from 'vuex'
+import store from './store'
+
+Vue.use(Vuex)
 Vue.use(ElementUI);
 
 
@@ -71,7 +76,7 @@ Vue.use(base).use(Grid)
   .use(Icon)
   .use(Tag)
   .use(Image)
-
+  .use(Stepper)
   .use(Panel)
   .use(Card)
   .use(NavBar)
@@ -84,6 +89,8 @@ Vue.use(base).use(Grid)
   .use(CellGroup)
   .use(Divider).use(DropdownItem).use(DropdownMenu);
 new Vue({
+
   router,
+  store,
   render: h => h(App)
 }).$mount("#app");

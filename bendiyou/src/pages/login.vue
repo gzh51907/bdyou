@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-10-12 09:20:01
- * @LastEditTime: 2019-10-16 14:14:48
+ * @LastEditTime: 2019-10-17 09:39:19
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -10,7 +10,7 @@
     <header style=" border-bottom: solid 0.05rem #EEE;   background: #F5F5F5;">
       <van-nav-bar style="color:#000" title="登陆">
         <van-icon @click="goto('/index')" name="wap-home-o" slot="left" size="25px" color="#000" />
-        <span style="color:#EE6774" slot="right" @click="goto('login')">注册</span>
+        <span style="color:#EE6774" slot="right" @click="goto('/reg')">注册</span>
       </van-nav-bar>
     </header>
     <van-cell-group>
@@ -98,6 +98,9 @@ export default {
   bottom: 0;
   left: 0;
   width: 100%;
+  z-index: 1310;
+  height: 50px;
+  background: #f5f5f5;
 }
 .error-tips {
   /* display: none; */
