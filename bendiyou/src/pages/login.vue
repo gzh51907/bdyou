@@ -66,12 +66,31 @@ export default {
     goto(path) {
       this.$router.push(path);
     },
-    btn() {
-      if (this.username === "" && this.password === "") {
+    async btn() {
+      let username = this.username;
+      let password = this.password;
+      let checked2 = this.checked2;
+      let content = this.content;
+
+      if (this.username === "" || this.password === "") {
         this.show = true;
         this.content = "用户名必须填 请输入密码";
       } else {
-        this.content = "请核对用户名或密码";
+        let { data } = await this.$axios.get(
+          "http://10.3.133.30:2999/users/login",
+          {
+            params: { username, password, checked2 }
+          }
+        );
+        console.log(data);
+        if (data.code === 1) {
+          // alert("登录成功");
+          this.$router.push({ name: "mine" });
+          localStorage.status = 1;
+        } else {
+          this.show = true;
+          this.content = "请检查用户或密码";
+        }
       }
     }
   }

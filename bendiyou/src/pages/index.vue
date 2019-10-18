@@ -438,7 +438,7 @@ export default {
   margin-top: -20px;
 
   .I_bg {
-    z-index: 100;
+    z-index: 10;
     height: 150px;
 
     span {
