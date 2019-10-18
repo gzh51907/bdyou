@@ -33,7 +33,10 @@ let router = new VueRouter({
     }, {
         name: "cart",
         path: "/cart",
-        component: Cart
+        component: Cart,
+        meta: {
+            requiresAuth: true
+        }
 
     }, {
         name: "classify",
@@ -79,5 +82,38 @@ let router = new VueRouter({
         path: '/',
         redirect: '/index'
     }]
+});
+// 全局路由守卫
+router.beforeEach(async function (to, from, next) {
+    // 在全局路由守卫beforeEach中进行页面权限访问控制
+    // 先判断目标路由是否需要鉴权
+    if (to.meta.requiresAuth) {
+        let user = localStorage.getItem('user');
+        if (user) {
+            let res = await store.dispatch('checkLogin');
+            console.log('res:', res)
+            if (res === 400) {
+                next({
+                    path: '/login',
+                    query: {
+                        targetUrl: to.fullPath
+                    }
+                });
+            } else {
+                next();
+            }
+        } else {
+            router.push({
+                path: '/login',
+                query: {
+                    targetUrl: to.fullPath
+                }
+            })
+        }
+
+    } else {
+        next();
+    }
+
 })
 export default router

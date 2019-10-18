@@ -31,7 +31,8 @@
       <div class="H_box">
         <div class="member-info">
           <a @click="goto('/login')" class="default-avatar"></a>
-          <a @click="goto('/login')" class="to-login">Hi,请点击登录</a>
+          <a @click="goto('/login')" class="to-login" v-if="showUser">Hi,请点击登录</a>
+          <a v-else class="to-login">{{username}}</a>
         </div>
         <div class="member-collect">
           <van-grid clickable :column-num="5" :border="false" icon-size="20px">
@@ -173,7 +174,7 @@
       <div style=" margin-bottom: 100px;margin-top:20px">
         <div class="nav-text">
           <a href="###" @click="goto('/login')">登录</a>
-          <a href="###"  @click="goto('/reg')">注册</a>
+          <a href="###" @click="goto('/reg')">注册</a>
           <a href="###">商家中心</a>
           <a href="###">反馈</a>
         </div>
@@ -184,12 +185,19 @@
   <script>
 export default {
   data() {
-    return {};
+    return {
+      showUser: true,
+      username: ""
+    };
   },
   methods: {
     goto(path) {
       this.$router.push(path);
     }
+  },
+  created() {
+    this.showUser = false;
+    this.username = JSON.parse(localStorage.getItem("user")).username;
   }
 };
 </script>

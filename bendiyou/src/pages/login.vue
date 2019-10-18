@@ -82,14 +82,18 @@ export default {
             params: { username, password, checked2 }
           }
         );
-        console.log(data);
+        // console.log(data);
         if (data.code === 1) {
-          // alert("登录成功");
-          this.$router.push({ name: "mine" });
-          localStorage.status = 1;
+          let { targetUrl } = this.$route.query;
+          this.$store.commit("login", { username, Authorization: data.data });
+          localStorage.setItem("status", 1);
+          // this.$router.replace({path:'/mine',params:{username}})
+          this.$router.replace({
+            path: targetUrl || "/mine"
+          });
         } else {
           this.show = true;
-          this.content = "请检查用户或密码";
+          this.content = "请检查用户名或密码";
         }
       }
     }

@@ -52,7 +52,7 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import base from './assets/css/base.css'
 Vue.use(ElementUI);
-
+import store from './store';
 
 Vue.use(base).use(Grid)
   .use(GridItem)
@@ -84,6 +84,7 @@ Vue.use(base).use(Grid)
   .use(CellGroup)
   .use(Divider).use(DropdownItem).use(DropdownMenu);
 new Vue({
+  store,
   router,
   render: h => h(App)
 }).$mount("#app");

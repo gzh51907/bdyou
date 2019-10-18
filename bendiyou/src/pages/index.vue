@@ -7,7 +7,7 @@
  -->
 <template>
   <div>
-    <van-sticky z-index="9999">
+    <van-sticky :z-index="9999">
       <header style=" background:#d50012" id="header">
         <van-row>
           <van-col span="24">
