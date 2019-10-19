@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-10-11 15:31:13
- * @LastEditTime: 2019-10-17 13:56:50
+ * @LastEditTime: 2019-10-19 15:54:55
  * @LastEditors: Please set LastEditors
  */
 import Vue from "vue";
@@ -11,8 +11,6 @@ import router from "./router";
 import "../postcss.js";
 Vue.config.productionTip = false;
 import "@vant/touch-emulator";
-
-
 
 import {
   Grid,
@@ -45,6 +43,10 @@ import {
   DropdownMenu,
   DropdownItem,
   Stepper,
+  GoodsAction,
+  GoodsActionIcon,
+  GoodsActionButton,
+  SubmitBar
 
 } from 'vant';
 import axios from 'axios';
@@ -87,9 +89,10 @@ Vue.use(base).use(Grid)
   .use(CheckboxGroup)
   .use(Toast)
   .use(CellGroup)
-  .use(Divider).use(DropdownItem).use(DropdownMenu);
+  .use(Divider).use(DropdownItem).use(DropdownMenu).use(GoodsAction)
+  .use(GoodsActionIcon)
+  .use(GoodsActionButton).use(SubmitBar);
 new Vue({
-
   router,
   store,
   render: h => h(App)

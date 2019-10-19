@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-10-12 09:29:58
- * @LastEditTime: 2019-10-16 18:32:18
+ * @LastEditTime: 2019-10-19 17:05:38
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -12,7 +12,7 @@
   top: 0;
   left: 0;width:100%;border-bottom: solid 0.05rem #EEE"
     >
-      <van-icon name="arrow-left" slot="left" size="25px" color="#000" />
+      <van-icon name="arrow-left" slot="left" size="25px" color="#000" @click="gourl" />
       <van-search
         placeholder="美食上新了"
         v-model="value"
@@ -40,6 +40,7 @@
                     v-for="(it) in item.child"
                     :key="it.gc_id"
                     style="margin:10px 0"
+                    to="goodsList"
                   >{{it.gc_name}}</van-grid-item>
                 </van-grid>
               </div>
@@ -113,6 +114,10 @@ export default {
   methods: {
     goto(path) {
       this.$router.push(path);
+    },
+    gourl() {
+      let url = localStorage.url;
+      this.$router.push(url);
     }
   }
 };
@@ -124,5 +129,8 @@ export default {
   border-color: #ee0a24;
   background-color: #fff;
   color: #ee0a24;
+}
+.van-sidebar-item--select {
+  margin-bottom: 0;
 }
 </style>

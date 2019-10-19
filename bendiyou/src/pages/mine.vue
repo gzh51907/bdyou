@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-10-12 09:25:22
- * @LastEditTime: 2019-10-16 18:38:10
+ * @LastEditTime: 2019-10-19 16:53:29
  * @LastEditors: Please set LastEditors
  -->
 
@@ -30,8 +30,9 @@
       </header>
       <div class="H_box">
         <div class="member-info">
-          <a @click="goto('/login')" class="default-avatar"></a>
-          <a @click="goto('/login')" class="to-login">Hi,请点击登录</a>
+          <a class="default-avatar"></a>
+          <a @click="goto('/login')" class="to-login" v-if="showUser">Hi,请点击登录</a>
+          <a v-else class="to-login">{{username}}</a>
         </div>
         <div class="member-collect">
           <van-grid clickable :column-num="5" :border="false" icon-size="20px">
@@ -44,25 +45,25 @@
             <van-grid-item
               icon="like-o"
               text="商品收藏"
-              url="/vant/mobile.html"
+              to="/"
               style="  background: rgba(0, 0, 0, 0.1);"
             />
             <van-grid-item
               icon="shop-collect-o"
               text="店铺收藏"
-              url="/vant/mobile.html"
+              to="/"
               style="  background: rgba(0, 0, 0, 0.1);"
             />
             <van-grid-item
               icon="search"
               text="我的足迹"
-              url="/vant/mobile.html"
+              url="/"
               style="  background: rgba(0, 0, 0, 0.1);"
             />
             <van-grid-item
               icon="shopping-cart-o"
               text="购物车"
-              url="/vant/mobile.html"
+              to="/cart"
               style="  background: rgba(0, 0, 0, 0.1);"
             />
           </van-grid>
@@ -173,7 +174,7 @@
       <div style=" margin-bottom: 100px;margin-top:20px">
         <div class="nav-text">
           <a href="###" @click="goto('/login')">登录</a>
-          <a href="###"  @click="goto('/reg')">注册</a>
+          <a href="###" @click="goto('/reg')">注册</a>
           <a href="###">商家中心</a>
           <a href="###">反馈</a>
         </div>
@@ -184,12 +185,23 @@
   <script>
 export default {
   data() {
-    return {};
+    return {
+      showUser: true,
+      username: ""
+    };
   },
   methods: {
     goto(path) {
       this.$router.push(path);
+    },
+    gourl() {
+      let url = localStorage.url;
+      this.$$router.push(url);
     }
+  },
+  created() {
+    this.showUser = false;
+    this.username = JSON.parse(localStorage.getItem("user")).username;
   }
 };
 </script>

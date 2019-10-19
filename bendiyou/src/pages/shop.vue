@@ -2,8 +2,8 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-10-12 09:48:38
- * @LastEditTime: 2019-10-12 09:48:38
- * @LastEditors: your name
+ * @LastEditTime: 2019-10-19 16:54:38
+ * @LastEditors: Please set LastEditors
  -->
 <template>
   <div id="app">
@@ -528,7 +528,12 @@ export default {
   },
   methods: {
     goto(id) {
-      this.$router.push({ name: "shopList", params: { id } });
+      localStorage.path = "shop";
+      this.$router.push({ name: "shopList", query: { id } });
+    },
+    gourl() {
+      let url = localStorage.url;
+      this.$$router.push(url);
     },
     async ShopList(i) {
       //发送ajax请求

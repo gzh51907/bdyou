@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-10-16 19:23:39
- * @LastEditTime: 2019-10-18 17:25:14
+ * @LastEditTime: 2019-10-19 09:16:19
  * @LastEditors: Please set LastEditors
  */
 import Vue from 'vue';
@@ -12,6 +12,7 @@ import Vuex from 'vuex';
 
 
 import cart from './cart'
+import common from './common'
 // 2. 使用（安装）Vuex
 Vue.use(Vuex);
 import persistedState from 'vuex-persistedstate'
@@ -23,7 +24,8 @@ const store = new Vuex.Store({
     // 只用模块化store后会影响state数据的获取
     // store.state.xxx -> store.state.cart.xxx
     modules: {
-        cart
+        cart,
+        common
     }
 });
 

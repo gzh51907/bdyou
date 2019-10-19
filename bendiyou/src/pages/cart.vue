@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-10-12 09:25:31
- * @LastEditTime: 2019-10-18 20:19:28
+ * @LastEditTime: 2019-10-19 17:06:30
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -11,13 +11,13 @@
       style=" border-bottom: solid 0.05rem #EEE;position: fixed;too:0;left:0;right:0;z-index:1000"
     >
       <van-nav-bar style="color:#000" title="购物车">
-        <van-icon name="arrow-left" slot="left" size="25px" color="#000" />
+        <van-icon name="arrow-left" slot="left" size="25px" color="#000" @click="gourl" />
 
         <van-icon name="ellipsis" slot="right" size="25px" color="#000" @click="goto('/login')" />
       </van-nav-bar>
     </header>
     <main style="padding:5px 10px;  overflow: auto; width:100%">
-      <div style="margin-top:45px">
+      <div style="margin-top:45px; margin-bottom: 100px;">
         <div style=" background: #fff;" v-for="(item, index) in shopname" :key="index">
           <van-checkbox-group v-model="shopname">
             <p style=" display: flex;">
@@ -94,19 +94,18 @@
         <a class="btn" @click="goto('/reg')">注册</a>
       </div>
     </div>
+    <van-submit-bar :price="talprice" button-text="确认信息" style="z-index:10;    bottom: 50px" />
   </div>
 </template>
 <script>
 export default {
   data() {
     return {
-      state: null,
+      status: null,
       box1: false,
       box2: true,
-      result: [],
+      // result: [],
       st: null
-      // goodslist: [],
-      // shopname: []
     };
   },
   computed: {
@@ -153,10 +152,16 @@ export default {
       }
 
       return arrry;
+    },
+    talprice() {
+      return this.$store.getters.totalPrice;
     }
   },
   created() {
-    this.state = localStorage.getItem("state");
+    this.status = localStorage.getItem("status");
+    if (this.status === 1) {
+      window.document.getElementById("boxc").style.display = "none";
+    }
     let arr = this.shopname;
 
     if (arr.length > 0) {
@@ -169,7 +174,7 @@ export default {
     st: function() {
       this.std();
     },
-    state: function() {
+    status: function() {
       window.document.getElementById("boxc").style.display = "none";
     }
   },
@@ -202,13 +207,17 @@ export default {
     goto(path) {
       this.$router.push(path);
     },
+    gourl() {
+      let url = localStorage.url;
+      this.$router.push(url);
+    },
     changeQty(id, nub) {
       this.$store.commit("changeQty", { id, nub });
       // window.console.log(id, nub);
     },
     del(id) {
       this.$store.commit("removeFromCart", id);
-      window.console.log(id);
+
       this.get;
     }
   }

@@ -2,14 +2,14 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-10-12 09:52:26
- * @LastEditTime: 2019-10-16 18:43:51
+ * @LastEditTime: 2019-10-19 16:56:11
  * @LastEditors: Please set LastEditors
  -->
 <template>
-  <div>
+  <div style="margin-bottom:50px">
     <div style="position: relative;">
       <div id="header">
-        <router-link to="/shop">
+        <router-link :to="path">
           <div class="header_l"></div>
         </router-link>
         <router-link to="login">
@@ -17,7 +17,7 @@
         </router-link>
       </div>
       <div class="goods-detail-pic">
-        <img :src=" ShopList.goods_image" alt />
+        <img :src="img" />
         <div class="xin"></div>
         <div class="dian"></div>
       </div>
@@ -25,12 +25,12 @@
         <div class="img1">
           <img src="https://img.bdyoo.com/shop/vda/06071883196486429.png" alt />
         </div>
-        <div class="goods-detail-name">{{ShopList.goods_info.goods_name}}</div>
+        <div class="goods-detail-name">{{a.goods_name}}</div>
         <div class="goods-detail-price">
           <dl>
             <dt>
               ￥
-              <em>{{ShopList.goods_info.goods_price}}</em>
+              <em>{{a.goods_price}}</em>
             </dt>
           </dl>
           <span class="sold">
@@ -62,7 +62,7 @@
       <div class="goods-detail-store">
         <div class="store-name">
           <i class="icon-store"></i>
-          {{ShopList.store_info.store_name}}
+          {{a.store_name}}
         </div>
         <div class="store-rate">
           <span class="equal">
@@ -86,7 +86,7 @@
       <div class="goods-detail-recom">
         <h4>店铺推荐</h4>
         <ul>
-          <li v-for="item in ShopList.goods_commend_list" :key="item.goods_id">
+          <li v-for="item in Recommend" :key="item.goods_id">
             <div class="pic">
               <img :src="item.goods_image_url" alt />
             </div>
@@ -122,6 +122,19 @@
       <router-link to="/index">
         <div class="huizhuye"></div>
       </router-link>
+
+      <van-goods-action style=" z-index: 99999;">
+        <van-goods-action-icon icon="chat-o" text="客服" />
+        <van-goods-action-icon
+          icon="cart-o"
+          text="购物车"
+          :info="cartlength"
+          to="cart"
+          @click="gturl"
+        />
+        <van-goods-action-button type="warning" text="加入购物车" @click="onClickIcon" />
+        <van-goods-action-button type="danger" text="立即购买" @click="onClickButton" />
+      </van-goods-action>
     </div>
   </div>
 </template>
@@ -129,26 +142,126 @@
 export default {
   data() {
     return {
-      ShopList: []
+      ShopList: [],
+      Recommend: [],
+      path: "",
+      a: [],
+      id: 0,
+      op: "goods_detail",
+      img: ""
     };
   },
+  methods: {
+    gturl() {
+      localStorage.url = this.$route.name;
+    },
+    async onClickIcon() {
+      window.console.log(this.$route.query.id);
+      let id = this.$route.query.id;
+      var good;
+      let currentGoods = this.$store.state.cart.cartList.filter(
+        item => item.goods_id === id
+      )[0];
+      if (currentGoods) {
+        let qty = currentGoods.qty++;
+        this.$store.commit("changeQty", { id, qty });
+      } else {
+        if (localStorage.path == "goodsList") {
+          let data = await this.$axios.get(
+            "http://10.3.133.30:2999/goods/" + id
+          );
+          good = {
+            goods_id: id,
+            goods_image: data.datas[0].goods_image.split(",")[0],
+            goods_name: data.datas[0].goods_name,
+            goods_promotion_price: data.datas[0].goods_promotion_price,
+            qty: data.datas[0].sell_out,
+            shopid: data.datas[0].store_id,
+            shopname: data.datas[0].store_name
+          };
+        } else {
+          let {
+            data: { datas }
+          } = await await this.$axios.get(
+            "https://s.bdyoo.com/mobile/index.php",
+            {
+              params: {
+                act: "goods",
+                op: this.op,
+                goods_id: id,
+                key: "",
+                dis_id: ""
+              }
+            }
+          );
+          good = {
+            goods_id: id,
+            goods_image: datas.goods_image.split(",")[0],
+            goods_name: datas.goods_info.goods_name,
+            goods_promotion_price: datas.goods_info.goods_price,
+
+            shopid: datas.store_info.store_id,
+            shopname: datas.store_info.store_name
+          };
+        }
+
+        this.$store.commit("adcart", good);
+      }
+    },
+    onClickButton() {},
+    goto() {
+      this.$route.push(this.path);
+    },
+    go(path) {
+      this.$route.push(path);
+    }
+  },
+
   async created() {
-    let { id } = this.$route.params;
+    this.id = this.$route.query.id;
+    // console.log(this.$route);
+    this.path = localStorage.path;
+    // if (this.$route.query.op) {
+    //   this.op = this.$route.query.op;
+    // }
+
     let {
       data: { datas }
     } = await this.$axios.get("https://s.bdyoo.com/mobile/index.php", {
       params: {
         act: "goods",
-        op: "goods_detail",
-        goods_id: id,
+        op: this.op,
+        goods_id: this.id,
         key: "",
         dis_id: ""
       }
     });
     this.ShopList = datas;
-
-    // console.log(this.ShopList.goods_info.goods_name);
+    this.Recommend = datas.goods_commend_list;
+    this.a = datas.goods_info;
+    this.img = this.ShopList.goods_image.split(",")[0];
+  },
+  computed: {
+    cartlength() {
+      // return this.$store.state.cartlist.length;
+      return this.$store.getters.cartlength;
+    }
+    // currentUser() {
+    //   return this.$store.state.common.user;
+    // }
   }
+  // watch: {
+  //   $route: function() {
+  //     this.path = this.$route.name;
+  //   }
+  // }
+  // beforeRouteUpdate(to, from, next) {
+  //   console.log("beforeRouteUpdate:", to, from);
+  //   if (to.name != from.name) {
+  //     this.path = from.path;
+  //   }
+  //   next();
+  // }
 };
 </script>
 <style lang="scss" scoped >
@@ -541,12 +654,12 @@ export default {
   height: 100%;
 }
 .huizhuye {
-  width: 32px;
-  height: 32px;
+  width: 38px;
+  height: 38px;
   background: #ffffff;
   position: fixed;
-  top: 510px;
-  left: 8px;
+  top: 480px;
+  left: 9px;
   z-index: 20;
   border-radius: 50%;
   border: 1px solid gainsboro;

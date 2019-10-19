@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-10-12 09:20:01
- * @LastEditTime: 2019-10-17 09:39:19
+ * @LastEditTime: 2019-10-19 09:58:28
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -70,7 +70,7 @@ export default {
       let username = this.username;
       let password = this.password;
       let checked2 = this.checked2;
-      let content = this.content;
+      // let content = this.content;
 
       if (this.username === "" || this.password === "") {
         this.show = true;
@@ -82,14 +82,18 @@ export default {
             params: { username, password, checked2 }
           }
         );
-        console.log(data);
+        // console.log(data);
         if (data.code === 1) {
-          // alert("登录成功");
-          this.$router.push({ name: "mine" });
-          localStorage.status = 1;
+          let { targetUrl } = this.$route.query;
+          this.$store.commit("login", { username, Authorization: data.data });
+          localStorage.setItem("status", "1");
+          // this.$router.replace({path:'/mine',params:{username}})
+          this.$router.replace({
+            path: targetUrl || "/mine"
+          });
         } else {
           this.show = true;
-          this.content = "请检查用户或密码";
+          this.content = "请检查用户名或密码";
         }
       }
     }

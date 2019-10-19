@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-10-17 10:46:19
- * @LastEditTime: 2019-10-18 14:00:05
+ * @LastEditTime: 2019-10-19 16:28:35
  * @LastEditors: Please set LastEditors
  */
 // import axios from 'axios';
@@ -22,6 +22,9 @@ let cart = ({
     getters: {
         cartlength(state) {
             return state.cartList.length;
+        },
+        totalPrice(state) {
+            return state.cartList.reduce((prev, item) => prev + item.goods_promotion_price * item.qty * 100, 0)
         },
     },
     mutations: {

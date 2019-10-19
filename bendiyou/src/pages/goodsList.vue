@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-10-16 15:05:26
- * @LastEditTime: 2019-10-16 18:40:06
+ * @LastEditTime: 2019-10-19 15:36:48
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -55,15 +55,9 @@
         <van-grid :border="false" :column-num="2" gutter="8">
           <van-grid-item style="margin-bottom:5px;" v-for="(item,index) in goodsdata" :key="index">
             <li class="goods-list-li" style="width:100%">
-              <a @click="goto('/goodsList')">
+              <a @click="go(item.goods_id)">
                 <div class="goods-pic">
-                  <img
-                    @click="goto('/goodsList')"
-                    alt
-                    :id="item.goods_id"
-                    :src="item.goods_image"
-                    lazy="loaded"
-                  />
+                  <img alt :id="item.goods_id" :src="item.goods_image" lazy="loaded" />
                 </div>
               </a>
               <dl class="goods-info">
@@ -71,7 +65,12 @@
                 <dd class="goods-price">
                   ￥
                   <em>{{item.goods_promotion_price}}</em>
-                  <van-icon name="add" class="quick_add_cart" size="2em"></van-icon>
+                  <van-icon
+                    name="add"
+                    class="quick_add_cart"
+                    size="2em"
+                    @click="addcart(item.goods_id)"
+                  ></van-icon>
                 </dd>
                 <dd class="goods-assist">
                   <span class="goods-sold">
@@ -115,10 +114,42 @@ export default {
     this.goodsdata = datas.data;
   },
   methods: {
+    go(id) {
+      localStorage.path = "goodslist";
+      this.$router.push({ name: "shopList", query: { id } });
+    },
     goto(path) {
       this.$router.push(path);
     },
-    onClickLeft() {}
+    onClickLeft() {},
+    async addcart(id) {
+      // let currentGoods = this.$store.state.cart.cartList.forEach(element => {
+      //   if (id === element.goods_id) return 1;
+      // });
+      let currentGoods = this.$store.state.cart.cartList.filter(
+        item => item.goods_id === id
+      )[0];
+      if (currentGoods) {
+        let qty = currentGoods.qty++;
+        this.$store.commit("changeQty", { id, qty });
+      } else {
+        let datas = await this.$axios.get(
+          "http://10.3.133.30:2999/goods/" + id
+        );
+        this.goods = datas.data[0];
+
+        let good = {
+          goods_id: id,
+          goods_image: this.goods.goods_image,
+          goods_name: this.goods.goods_name,
+          goods_promotion_price: this.goods.goods_promotion_price,
+          qty: this.goods.sell_out,
+          shopid: this.goods.store_id,
+          shopname: this.goods.store_name
+        };
+        this.$store.commit("adcart", good);
+      }
+    }
   }
 };
 </script>
@@ -216,7 +247,5 @@ export default {
       }
     }
   }
-}
-main {
 }
 </style>

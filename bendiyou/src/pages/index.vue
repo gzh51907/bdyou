@@ -2,12 +2,12 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-10-12 09:19:13
- * @LastEditTime: 2019-10-17 21:00:42
+ * @LastEditTime: 2019-10-19 16:30:54
  * @LastEditors: Please set LastEditors
  -->
 <template>
   <div>
-    <van-sticky :z-index="1500">
+    <van-sticky :z-index="1000">
       <header style=" background:#d50012" id="header">
         <van-row>
           <van-col span="24">
@@ -180,7 +180,7 @@
       </div>
       <van-image src="https://img.bdyoo.com/mobile/special/s0/s0_06227369224495267.jpg"></van-image>
       <ul class="goods-list" style="background-color: #f5f5f5;">
-        <li class="goods-list-li">
+        <li class="goods-list-li" @click="goto('/goodsList')">
           <a href="###">
             <div class="goods-pic">
               <img
@@ -196,12 +196,11 @@
             <dd class="goods-price">
               ￥
               <em>20.00</em>
-              <van-icon name="add" class="quick_add_cart" size="2em"></van-icon>
             </dd>
           </dl>
           <!---->
         </li>
-        <li class="goods-list-li">
+        <li class="goods-list-li" @click="goto('/goodsList')">
           <a href="###">
             <div class="goods-pic">
               <img
@@ -217,12 +216,11 @@
             <dd class="goods-price">
               ￥
               <em>22.00</em>
-              <van-icon name="add" class="quick_add_cart" size="2em"></van-icon>
             </dd>
           </dl>
           <!---->
         </li>
-        <li class="goods-list-li">
+        <li class="goods-list-li" @click="goto('/goodsList')">
           <a href="###">
             <div class="goods-pic">
               <img
@@ -238,12 +236,11 @@
             <dd class="goods-price">
               ￥
               <em>8.00</em>
-              <van-icon name="add" class="quick_add_cart" size="2em"></van-icon>
             </dd>
           </dl>
           <!---->
         </li>
-        <li class="goods-list-li">
+        <li class="goods-list-li" @click="goto('/goodsList')">
           <a href="###">
             <div class="goods-pic">
               <img
@@ -259,12 +256,11 @@
             <dd class="goods-price">
               ￥
               <em>9.90</em>
-              <van-icon name="add" class="quick_add_cart" size="2em"></van-icon>
             </dd>
           </dl>
           <!---->
         </li>
-        <li class="goods-list-li">
+        <li class="goods-list-li" @click="goto('/goodsList')">
           <a href="###">
             <div class="goods-pic">
               <img
@@ -280,12 +276,11 @@
             <dd class="goods-price">
               ￥
               <em>2.90</em>
-              <van-icon name="add" class="quick_add_cart" size="2em"></van-icon>
             </dd>
           </dl>
           <!---->
         </li>
-        <li class="goods-list-li">
+        <li class="goods-list-li" @click="goto('/goodsList')">
           <a href="###">
             <div class="goods-pic">
               <img
@@ -301,7 +296,6 @@
             <dd class="goods-price">
               ￥
               <em>49.50</em>
-              <van-icon name="add" class="quick_add_cart" size="2em"></van-icon>
             </dd>
           </dl>
           <!---->

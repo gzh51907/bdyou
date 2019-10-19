@@ -2,43 +2,44 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-10-11 15:31:13
- * @LastEditTime: 2019-10-18 17:49:18
+ * @LastEditTime: 2019-10-19 16:56:49
  * @LastEditors: Please set LastEditors
  -->
 <template>
   <div id="app">
     <router-view />
 
-    <div v-if="path!='login'">
+    <div v-if="path!='login||shopList'">
       <el-backtop target :bottom="-100">
         <div class="fix-block-r">
-          <a href="javascript:void(0);" class="gotop-btn gotop" id="goTopBtn">
+          <a class="gotop-btn gotop" id="goTopBtn">
             <i></i>
           </a>
         </div>
       </el-backtop>
       <div>
         <van-row type="flex" class="ap">
-<<<<<<< HEAD
           <van-col span="24" style=" position: fixed;left: 0;bottom: 0;z-index:1200 ">
-=======
-          <van-col span="24" style="  position: fixed;left: 0;bottom: 0;z-index:1200 ">
->>>>>>> b67295231b4aee2f424f02ec2c3871f2b1f92574
             <footer>
               <van-tabbar
                 style=" background-color: #fff!important;
-    box-shadow: 0 0 10px 0 hsla(0, 6%, 58%, 0.6) !important;height: 50px;"
+    box-shadow: 0 0 10px 0 hsla(0, 6%, 58%, 0.6) !important;height: 50px"
                 v-model="active"
                 active-color="#EB111F"
                 inactive-color="#000"
                 size="24px"
                 route
               >
-                <van-tabbar-item icon="home-o" to="/index">首页</van-tabbar-item>
-                <van-tabbar-item icon="qr" to="/classify">分类</van-tabbar-item>
-                <van-tabbar-item icon="shop-o" to="/shop">店铺</van-tabbar-item>
-                <van-tabbar-item icon="shopping-cart-o" to="/cart" :info=" cartlength">购物车</van-tabbar-item>
-                <van-tabbar-item icon="contact" to="/mine">我的</van-tabbar-item>
+                <van-tabbar-item icon="home-o" to="/index" @click=" gturl">首页</van-tabbar-item>
+                <van-tabbar-item icon="qr" to="/classify" @click=" gturl">分类</van-tabbar-item>
+                <van-tabbar-item icon="shop-o" to="/shop" @click=" gturl">店铺</van-tabbar-item>
+                <van-tabbar-item
+                  icon="shopping-cart-o"
+                  to="/cart"
+                  :info=" cartlength"
+                  @click=" gturl"
+                >购物车</van-tabbar-item>
+                <van-tabbar-item icon="contact" to="/mine" @click=" gturl">我的</van-tabbar-item>
               </van-tabbar>
             </footer>
           </van-col>
@@ -70,14 +71,16 @@ export default {
     //   return this.$store.state.common.user;
     // }
   },
+  methods: {
+    gturl() {
+      localStorage.url = this.$route.name;
+    }
+  },
+  created() {},
   watch: {
     $route: function() {
       this.path = this.$route.name;
     }
-  },
-  components: {},
-  methods: {
-    click() {}
   }
 };
 </script>
