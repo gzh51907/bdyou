@@ -166,7 +166,7 @@ export default {
           // console.log({ goods_id });
           //确认
           let { data } = await this.$axios.post(
-            "http://localhost:2999/goods/add",
+            "http://120.78.213.100:2999/goods/add",
             {
               goods_id,
               goods_name,

@@ -363,7 +363,7 @@ export default {
     };
   },
   async created() {
-    let datas = await this.$axios.get("http://10.3.133.30:2999/goods");
+    let datas = await this.$axios.get("http://120.78.213.100:2999/goods");
     this.goodsdata = datas.data;
   },
 
@@ -400,7 +400,7 @@ export default {
         window.console.log(qty);
       } else {
         let datas = await this.$axios.get(
-          "http://10.3.133.30:2999/goods/" + id
+          "http://120.78.213.100:2999/goods/" + id
         );
         this.goods = datas.data[0];
         window.console.log(this.goods);

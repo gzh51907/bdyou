@@ -77,7 +77,7 @@ export default {
         this.content = "用户名必须填 请输入密码";
       } else {
         let { data } = await this.$axios.get(
-          "http://10.3.133.30:2999/users/login",
+          "http://120.78.213.100:2999/users/login",
           {
             params: { username, password, checked2 }
           }

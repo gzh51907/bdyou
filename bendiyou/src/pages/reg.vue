@@ -61,7 +61,7 @@ export default {
   methods: {
     async checkUsername(username) {
       let { data } = await this.$axios.get(
-        "http://10.3.133.30:2999/users/check",
+        "http://120.78.213.100:2999/users/check",
         {
           params: {
             username: username
@@ -88,7 +88,7 @@ export default {
         this.content = "请重新输入！";
       } else {
         let { data } = await this.$axios.post(
-          "http://10.3.133.30:2999/users/reg",
+          "http://120.78.213.100:2999/users/reg",
           { username, password }
         );
         // console.log(data)

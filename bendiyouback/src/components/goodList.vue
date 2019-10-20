@@ -92,7 +92,7 @@ export default {
   methods: {
     // 查询所有数据
     async getGoodsList() {
-      let { data } = await this.$axios.get("http://localhost:2999/goods/");
+      let { data } = await this.$axios.get("http://120.78.213.100:2999/goods/");
       // console.log(data);
       this.tableData = data;
     },

@@ -21,6 +21,7 @@ import ShopList from '../pages/ShopList.vue'
 import GoodsList from '../pages/goodsList.vue'
 
 let router = new VueRouter({
+	mode:'history',
     routes: [{
         name: "index",
         path: "/index",

@@ -53,7 +53,7 @@ export default {
   },
   methods: {
     async getUserInfo() {
-      let { data } = await this.$axios.get("http://localhost:2999/users/");
+      let { data } = await this.$axios.get("http://120.78.213.100:2999/users/");
       this.tableData = data;
     },
     // 时间转换
@@ -81,7 +81,7 @@ export default {
         .then(async () => {
           //确认
           let { data } = await this.$axios.get(
-            "http://localhost:2999/users/logoff",
+            "http://120.78.213.100:2999/users/logoff",
             {
               params: {
                 username: row.username
