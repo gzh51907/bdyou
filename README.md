@@ -29,3 +29,83 @@
 
     * webAPP
     * 后台管理系统
+
+* 项目文件目录：
+
+    ​    ├─bendiyou
+
+    ​    │  ├─dist
+
+    ​    │  │  ├─css
+
+    ​    │  │  ├─fonts
+
+    ​    │  │  ├─img
+
+    ​    │  │  └─js
+
+    ​    │  ├─public
+
+    ​    │  └─src
+
+    ​    │      ├─assets
+
+    ​    │      │  ├─css
+
+    ​    │      │  └─images
+
+    ​    │      ├─components
+
+    ​    │      ├─img
+
+    ​    │      ├─pages
+
+    ​    │      ├─router
+
+    ​    │      └─store
+
+    ​    ├─bendiyouback
+
+    ​    │  ├─bdback
+
+    ​    │  │  ├─css
+
+    ​    │  │  ├─fonts
+
+    ​    │  │  ├─img
+
+    ​    │  │  └─js
+
+    ​    │  ├─public
+
+    ​    │  ├─src
+
+    ​    │  │  ├─assets
+
+    ​    │  │  │  └─css
+
+    ​    │  │  ├─components
+
+    ​    │  │  │  └─product
+
+    ​    │  │  ├─router
+
+    ​    │  │  └─views
+
+    ​    │  └─static
+
+    ​    │      └─JSON
+
+    ​    ├─database
+
+    ​    │  ├─doc
+
+    ​    │  └─src
+
+    ​    │      ├─db
+
+    ​    │      ├─routers
+
+    ​    │      └─utils
+
+    ​    └─project_img
